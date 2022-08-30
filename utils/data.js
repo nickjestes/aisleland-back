@@ -2,7 +2,6 @@ let foods = [
     {
         typeName: 'Bread',
         aisleLocation: '4',
-        
     },
     {
         typeName: 'Cereal',

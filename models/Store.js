@@ -43,6 +43,8 @@ const storeSchema = new Schema(
 
 const Store = model('store', storeSchema);
 
+// const AllItems
+
 
 // Store.create({}, (err, data) => {
 //     if (err) {

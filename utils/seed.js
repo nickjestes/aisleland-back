@@ -19,9 +19,13 @@ connection.once('open', async () => {
         
     // });
 
-    await Food.create(foodCategories);
-    // await itemsID = () => (Food.collection.distinct('_id'));
+    const r1 = await Food.create(foodCategories);
+    console.log({r1, food_ids: r1.map(x => x._id)});
 
+    const res = await Food.collection.distinct('_id');
+    console.log(res);
+    // const itemsID = async () => (await Food.collection.distinct('_id'));
+        
     await Household.create(householdCategories);
 
     // Add a store to the collection and await the results
