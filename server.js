@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./config/connection');
-// const routes = require('./routes');
+// const allRoutes = require('./controllers'); // TODO ROUTES
 
 const cwd = process.cwd();
 
@@ -14,7 +14,8 @@ const activity = cwd.includes('aisleland-back')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(routes);
+
+// app.use('/', allRoutes);
 
 db.once('open', () => {
   app.listen(PORT, () => {
