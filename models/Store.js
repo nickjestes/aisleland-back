@@ -43,15 +43,4 @@ const storeSchema = new Schema(
 
 const Store = model('store', storeSchema);
 
-// const AllItems
-
-
-// Store.create({}, (err, data) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log(data);
-//     }
-// });
-
 module.exports = Store;

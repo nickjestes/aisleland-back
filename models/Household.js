@@ -9,6 +9,10 @@ const householdItemSchema = new Schema({
         type: String,
         required: true,
     },
+    unixTimestamp: {
+        type: Number,
+        default: Date.now(),
+    }
 },
     {
         toJSON: {
