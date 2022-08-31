@@ -15,7 +15,7 @@ module.exports = {
             ).catch((err) => res.status(500).json(err));
     },
 
-    // update (POST) a selected Food in db
+    // update (PUT) a selected Food in db
     // updateFood(req, res) {
 
     // },

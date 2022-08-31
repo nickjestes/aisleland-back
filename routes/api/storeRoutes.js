@@ -1,14 +1,20 @@
 const router = require('express').Router();
 const {
-    getSingleStore,
-    // createStore,
+    getSingleStoreByAddress,
+    getStoresByNameZip,
+    createStore,
 } = require('../../controllers/storeController');
 
 
 // GET to /api/stores with json to get an individual store
-router.route('/').get(getSingleStore);
+router.route('/').get(getSingleStoreByAddress);
 
-// POST to /api/stores with json to create a new store // ! TODO
-// router.route('/').post(createStore);
+// GET to /api/stores with json to get store(s)
+router.route('/bynamezip').get(getStoresByNameZip);
+
+// POST to /api/stores with json to create a new store
+router.route('/').post(createStore);
+
+// PUT to /api/stores/:storeId to update a store // TODO
 
 module.exports = router;

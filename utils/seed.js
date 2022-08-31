@@ -26,7 +26,8 @@ connection.once('open', async () => {
     // Add a store to the collection and await the results
     await Store.collection.insertOne({
         name: 'Safeway',
-        address: '300 Bellevue Way NE, Bellevue, WA 98004',
+        address: '300 Bellevue Way NE, Bellevue, WA',
+        zipCode: 98004,
         allItems: {
             foodCategories: foods1.map(x => x._id),
             householdCategories: households1.map(x => x._id)
@@ -44,7 +45,8 @@ connection.once('open', async () => {
 
     await Store.collection.insertOne({
         name: 'Walgreen',
-        address: '1135 116th Ave NE #105, Bellevue, WA 98004',
+        address: '1135 116th Ave NE #105, Bellevue, WA',
+        zipCode: 98004,
         allItems: {
             foodCategories: foods2.map(x => x._id),
             householdCategories: households2.map(x => x._id)
