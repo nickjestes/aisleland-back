@@ -15,7 +15,7 @@ const foodSchema = new Schema({
             getters: true,
         },
         id: true,
-        timestamps: true
+        timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
     }
 );
 

@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "seed": "node utils/seed"
+        "seed": "node utils/seed",
+        "server": "nodemon server"
     },
     "repository": {
         "type": "git",
