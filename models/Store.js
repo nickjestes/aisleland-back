@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+
 // Schema to create major categories model
 const majorCategorySchema = new Schema(
     {
@@ -30,7 +31,11 @@ const storeSchema = new Schema(
         },
         address: {
             type: String,
-            default: true,
+            required: true,
+        },
+        zipCode: {
+            type: Number,
+            required: true,
         },
         allItems: majorCategorySchema
     },

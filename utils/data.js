@@ -381,4 +381,13 @@ const ALLITEMS = [
         householdCategories2: householdItems_store2,
     }
 ]
-module.exports = { ALLITEMS }; 
+
+const userData = {
+    userName: 'alphaTesterPrime',
+    email: 'alphatesters@mail.com',
+    password: 'password1'
+};
+
+const handleError = (err) => console.error(err);
+
+module.exports = { ALLITEMS, userData, handleError }; 
