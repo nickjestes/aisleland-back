@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
-const { Store, Household, Food } = require('../models');
-const { ALLITEMS } = require('./data');
+const { Store, Household, Food, User } = require('../models');
+const { ALLITEMS, userData, handleError } = require('./data');
 
 connection.on('error', (err) => err);
 
@@ -11,6 +11,7 @@ connection.once('open', async () => {
     await Store.deleteMany({});
     await Food.deleteMany({});
     await Household.deleteMany({});
+    await User.deleteMany({});
 
     // Destructuring data.js 
     const { foodCategories1, householdCategories1 } = ALLITEMS[0];
@@ -20,9 +21,10 @@ connection.once('open', async () => {
     const households1 = await Household.create(householdCategories1);
 
     // map to return just their _id
-    console.log({ food_ids1: foods1.map(x => x._id) });
-    console.log({ household_ids1: households1.map(x => x._id) });
-        
+    // debug
+    // console.log({ food_ids1: foods1.map(x => x._id) });
+    // console.log({ household_ids1: households1.map(x => x._id) });
+
     // Add a store to the collection and await the results
     await Store.collection.insertOne({
         name: 'Safeway',
@@ -31,7 +33,7 @@ connection.once('open', async () => {
         allItems: {
             foodCategories: foods1.map(x => x._id),
             householdCategories: households1.map(x => x._id)
-        }, 
+        },
     });
     console.info('Finished seeding first store! 🎉');
 
@@ -40,8 +42,9 @@ connection.once('open', async () => {
     const foods2 = await Food.create(foodCategories2);
     const households2 = await Household.create(householdCategories2);
 
-    console.log({ food_ids2: foods2.map(x => x._id) });
-    console.log({ household_ids2: households2.map(x => x._id) });
+    // debug
+    // console.log({ food_ids2: foods2.map(x => x._id) });
+    // console.log({ household_ids2: households2.map(x => x._id) });
 
     await Store.collection.insertOne({
         name: 'Walgreen',
@@ -50,9 +53,26 @@ connection.once('open', async () => {
         allItems: {
             foodCategories: foods2.map(x => x._id),
             householdCategories: households2.map(x => x._id)
-        }, 
+        },
     });
     console.info('Finished seeding second store! 🎉');
+
+    // ? why doesn't this work
+    // const user = await User.create(userData, (x) =>
+    //     {
+    //         console.error({x});
+    //         err ? handleError(err) : console.info('User created 🎉');
+    //     }
+    // );
+    // const user = await User.collection.insertOne(userData);
+
+    // ? try catch block works
+    try {
+        await User.create(userData);
+        console.info('User created 🎉');
+    } catch (err) {
+        console.error(err);
+    }
 
     console.info('Seeding complete! 🌱');
     process.exit(0);

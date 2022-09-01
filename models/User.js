@@ -1,30 +1,42 @@
 const { Schema, model, SchemaTypes } = require('mongoose');
 const bcrypt = require('bcrypt'), SALT_WORK_FACTOR = 10;
-require('mongoose-type-email');
+
+const validateEmail = (email) => {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+};
 
 const userSchema = new Schema({
-    username: {
+    userName: {
         type: String,
         required: true,
-        index: { unique: true },
+        // unique: true,
     },
     email: {
-        type: SchemaTypes.Email,
+        type: String,
         required: true,
         unique: true,
+        trim: true,
+        lowercase: true,
+        validate: [
+            validateEmail, "Invalid Email, please try another"
+        ],
+        match: [
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            "Invalid Email, please try another",
+        ],
     },
-    password: { type: String, required: true }
-})
-
-
-
-// User.create({
-//     username: "alphaTester",
-//     email: "somemail@email.com",
-//     password: "password1",
-// })
+    password: { type: String, required: true } // this is hashed
+},
+    {
+        timestamps: true
+    }
+);
 
 userSchema.pre('save', function (next) {
+    //debug
+    // console.log('logging inside of presave hook'); 
+
     let user = this;
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
@@ -38,6 +50,8 @@ userSchema.pre('save', function (next) {
             if (err) return next(err);
             // override the cleartext password with the hashed one
             user.password = hash;
+            // debug
+            // console.info('user password hashed and stored into database');
             next();
         });
 
