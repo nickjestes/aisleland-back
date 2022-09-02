@@ -8,7 +8,7 @@ const {
 
 
 // GET to /api/stores with json to get an individual store
-router.route('/').get(getSingleStoreByAddress);
+router.route('/:address').get(getSingleStoreByAddress);
 
 // GET to /api/stores with json to get store(s)
 router.route('/:name/:zipCode').get(getStoresByNameZip);

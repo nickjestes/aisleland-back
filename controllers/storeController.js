@@ -5,7 +5,8 @@ module.exports = {
 
     // GET to request a store by address
     getSingleStoreByAddress(req, res) {
-        Store.findOne({ address: req.body.address })
+        // console.log("my address is ", req.params);
+        Store.findOne({ address: req.params.address })
             .select('-__v')
             .then((store) =>
                 !store

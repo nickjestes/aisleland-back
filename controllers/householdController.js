@@ -3,7 +3,7 @@ const { Store, Household } = require('../models');
 module.exports = {
     // get all Foods in db
     getHousehold(req, res) {
-        Store.findOne({ address: req.body.address })
+        Store.findOne({ address: req.params.address })
             .select('-__v')
             .then((store) =>
                 // res.json(store.allItems.foodCategories)
