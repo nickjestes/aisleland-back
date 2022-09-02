@@ -11,12 +11,12 @@ const {
 router.route('/').get(getSingleStoreByAddress);
 
 // GET to /api/stores with json to get store(s)
-router.route('/bynamezip').get(getStoresByNameZip);
+router.route('/:name/:zipCode').get(getStoresByNameZip);
 
 // POST to /api/stores with json to create a new store
 router.route('/').post(createStore);
 
-// PUT to /api/stores/:storeId to update a store // TODO
+// PUT to /api/stores/:storeId to update a store
 router.route('/:storeId').put(updateStore);
 
 module.exports = router;
