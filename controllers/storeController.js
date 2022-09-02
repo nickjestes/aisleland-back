@@ -18,8 +18,8 @@ module.exports = {
     // GET store(s) by name and zipcode
     getStoresByNameZip(req, res) {
         Store.find({
-            name: req.body.name,
-            zipCode: req.body.zipCode
+            name: req.params.name,
+            zipCode: req.params.zipCode
         })
             .then((stores) => res.json(stores))
             .catch((err) => res.status(500).json(err));
