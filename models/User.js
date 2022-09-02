@@ -10,7 +10,9 @@ const userSchema = new Schema({
     userName: {
         type: String,
         required: true,
-        // unique: true,
+        unique: true,
+        min: 6,
+        max: 24,
     },
     email: {
         type: String,
@@ -18,6 +20,7 @@ const userSchema = new Schema({
         unique: true,
         trim: true,
         lowercase: true,
+        max: 128,
         validate: [
             validateEmail, "Invalid Email, please try another"
         ],

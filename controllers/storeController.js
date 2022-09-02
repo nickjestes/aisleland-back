@@ -5,7 +5,8 @@ module.exports = {
 
     // GET to request a store by address
     getSingleStoreByAddress(req, res) {
-        Store.findOne({ address: req.body.address })
+        // console.log("my address is ", req.params);
+        Store.findOne({ address: req.params.address })
             .select('-__v')
             .then((store) =>
                 !store
@@ -24,7 +25,20 @@ module.exports = {
             .then((stores) => res.json(stores))
             .catch((err) => res.status(500).json(err));
     },
-    // PUT to update an existing store // TODO
+
+    // PUT to update an existing store 
+    updateStore(req, res) {
+        Store.findOneAndUpdate(req.params.storeId, req.body,
+            { runValidators: true, new: true }
+        )
+            .then((store) =>
+                !store
+                    ? res.status(404)
+                        .json({ errMessage: 'No store found with Id ❌' })
+                    : res.json(store)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
 
     // POST to create a store
     createStore(req, res) {
