@@ -1,24 +1,17 @@
 const express = require('express');
-const db = require('./config/connection');
+const { connection, connectionString } = require('./config/connection');
 const allRoutes = require('./routes'); // TODO ROUTES
-
-const cwd = process.cwd();
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-// Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
-const activity = cwd.includes('aisleland-back')
-  ? cwd.split('/aisleland-back/')[1]
-  : cwd;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/', allRoutes);
 
-db.once('open', () => {
+connection.once('open', () => {
   app.listen(PORT, () => {
-    console.log(`API server for ${activity} running on port ${PORT}!`);
+    console.log(`API server for Aisleland Backend running on port ${PORT}!`);
   });
 });

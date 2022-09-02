@@ -3,6 +3,7 @@ const {
     getSingleStoreByAddress,
     getStoresByNameZip,
     createStore,
+    updateStore,
 } = require('../../controllers/storeController');
 
 
@@ -16,5 +17,6 @@ router.route('/bynamezip').get(getStoresByNameZip);
 router.route('/').post(createStore);
 
 // PUT to /api/stores/:storeId to update a store // TODO
+router.route('/:storeId').put(updateStore);
 
 module.exports = router;

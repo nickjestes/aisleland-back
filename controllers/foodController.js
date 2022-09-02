@@ -1,7 +1,7 @@
 const { Store, Food } = require('../models');
 
 module.exports = {
-    // GET all Foods in db
+    // get all Foods in db
     getFoods(req, res) {
         Store.findOne({ address: req.body.address })
             .select('-__v')
@@ -15,8 +15,22 @@ module.exports = {
             ).catch((err) => res.status(500).json(err));
     },
 
-    // update (PUT) a selected Food in db
-    // updateFood(req, res) {
+    // get single food item by _id
+    getSingleFood(req, res) {
+        Food.findOne({ _id: req.params.foodId })
+            .then((food) => {
+                res.json(food)
+            })
+            .catch((err) => res.status(500).json(err));
+    },
 
-    // },
+    // update (POST) a selected Food in db
+    updateFood(req, res) {
+        Food.findOneAndUpdate(req.params.foodId,
+            req.body,
+            { runValidators: true, new: true }
+        )
+            .then((food) => res.json(food))
+            .catch((err) => res.status(500).json(err));
+    },
 }
