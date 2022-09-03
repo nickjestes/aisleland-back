@@ -1,5 +1,5 @@
 const { Schema, model, SchemaTypes } = require('mongoose');
-const bcrypt = require('bcrypt'), SALT_WORK_FACTOR = 10;
+const bcrypt = require('bcrypt'), SALT_WORK_FACTOR = 4;
 
 const validateEmail = (email) => {
     const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -36,6 +36,7 @@ const userSchema = new Schema({
     }
 );
 
+// pre save hook for encrypting password
 userSchema.pre('save', function (next) {
     //debug
     // console.log('logging inside of presave hook'); 
@@ -62,11 +63,14 @@ userSchema.pre('save', function (next) {
 
 });
 
-userSchema.methods.comparePassword = function (candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
-    });
+// post save hook for comfirmation
+userSchema.post('save', function (doc, next) {
+    console.info('new user was created and saved', doc);
+    next();
+});
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
 };
 
 
