@@ -2,6 +2,7 @@ const express = require('express');
 const { connection, connectionString } = require('./config/connection');
 const allRoutes = require('./routes'); // TODO ROUTES
 const cors = require("cors")
+const { authMiddleware } = require('./utils/auth');
 
 const PORT = process.env.PORT || 3001;
 const app = express();

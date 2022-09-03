@@ -5,8 +5,8 @@ const {
     updateHousehold, 
 } = require('../../controllers/householdController');
 
-// GET to /api/households/:address to request all Food items relating to that store
-router.route('/:address').get(getHousehold);
+// GET to /api/households/:storeId to request all Food items relating to that store
+router.route('/:storeId').get(getHousehold);
 
 // GET to /api/households/:householdId to request the single household item
 router.route('/:householdId').get(getSingleHousehold);
