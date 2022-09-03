@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     // login the user and create a session cookie
@@ -31,12 +32,20 @@ module.exports = {
 
             // update cookie so user gets logged in 
             const token = signToken(user)
-            console.info(user, token);
+            console.info(user);
             res.cookie('jwt', token, { maxAge: 60 * 60 * 2 * 1000 });
 
-            return res.status(200).json({ user, msg: 'You are now logged in!' });
+            /* DEBUG */
+            // Cookies that have not been signed
+            console.log('Cookies: ', req.cookies)
+
+            // Cookies that have been signed
+            console.log('Signed Cookies: ', req.signedCookies)
+            /* DEBUG */
+
+            return res.status(200).json({ user, msg: 'You are now logged in!', cookie: res.cookie });
         } catch (err) {
-            console.error("now in catch block",err);
+            console.error("now in catch block", err);
             res.status(400).json(err);
         }
     },
@@ -44,7 +53,7 @@ module.exports = {
     // register an user 
     registerUser: (req, res) => {
         console.log("📣 creating with", { "body": req.body });
-        // User.create(req.body).then(data => {
+
         User.create({
             userName: req.body.userName,
             email: req.body.email,
@@ -62,8 +71,6 @@ module.exports = {
         });
     },
 
-    //Item.create(req.body).then(function(item) { ... }, function(err) { ... });
-
 
     // updates an user, allows the user to change username/email/password
     updateUser(req, res) {
@@ -71,7 +78,19 @@ module.exports = {
     },
 
     // logout the user, remove the req.session.user
-    logoutUser(req, res) {
+    logoutUser: (req, res) => {
+        console.log('📣 Logging out! Destroying cookie');
+        res.cookie('jwt', '', { maxAge: 1 });
+
+        /* DEBUG */
+        // Cookies that have not been signed
+        console.log('Cookies: ', req.cookies)
+
+        // Cookies that have been signed
+        console.log('Signed Cookies: ', req.signedCookies)
+        /* DEBUG */
+
+        res.redirect('/');
 
     },
 }
