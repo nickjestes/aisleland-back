@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-
-const secret = 'mysecretssshhhhhhh';
+    
+const secret = 'superprivatekeyneverevershownorshareitwithanyonenotevenyourboss';
 const expiration = '2h';
 
 module.exports = {
@@ -25,8 +25,8 @@ module.exports = {
         return req;
     },
 
-    signToken: function ({ email, username, _id }) {
-        const payload = { email, username, _id };
+    signToken: function ({ email, userName, _id }) {
+        const payload = { email, userName, _id };
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
 };
