@@ -26,11 +26,15 @@ module.exports = {
 
     // update (POST) a selected Food in db
     updateFood(req, res) {
+        console.log(req.params,req.body)
         Food.findOneAndUpdate(req.params.foodId,
-            req.body,
+            {aisleLocation: req.body.aisleLocation},
             { runValidators: true, new: true }
         )
-            .then((food) => res.json(food))
+            .then((food) => {
+                console.log(food)
+                res.json(food)
+            })
             .catch((err) => res.status(500).json(err));
     },
 }
