@@ -101,8 +101,19 @@ module.exports = {
 
         try {
             const user = jwt.verify(token, secret);
-            console.log(user.data.userName);
             res.json({ message: `Welcome to the club, ${user.data.userName}`});
+        } catch {
+            res.status(403).json({message: "Invalid token"});
+        }
+    },
+
+
+    checkToken: (req, res) => {
+        const token = req.headers.authorization.split(" ")[1];
+
+        try {
+            const user = jwt.verify(token, secret);
+            res.json(user);
         } catch {
             res.status(403).json({message: "Invalid token"});
         }
