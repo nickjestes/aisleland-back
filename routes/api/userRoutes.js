@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {
+    listUsers,
     loginUser,
     registerUser,
     // updateUser,
@@ -8,10 +9,13 @@ const {
     checkToken,
 } = require('../../controllers/userController');
 
+// GET to /api/users/ to get a list of registered users
+router.route('/').get(listUsers);
+
 // POST to /api/users/login with json to login
 router.route('/login').post(loginUser);
 
-// POST to /api/users with json to create a user
+// POST to /api/users with json to create an user
 router.route('/').post(registerUser);
 
 // GET to /api/users/logout to destroy token and logout
