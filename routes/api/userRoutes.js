@@ -3,6 +3,7 @@ const {
     loginUser,
     registerUser,
     // updateUser,
+    protected,
     logoutUser,
 } = require('../../controllers/userController');
 
@@ -13,5 +14,7 @@ router.route('/login').post(loginUser);
 router.route('/').post(registerUser);
 
 router.route('/logout').get(logoutUser);
+
+router.route('/protected').get(protected);
 
 module.exports = router;

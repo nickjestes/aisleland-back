@@ -1,6 +1,7 @@
 const { User } = require('../models');
-const { signToken } = require('../utils/auth');
+const { signToken, secret } = require('../utils/auth');
 const jwt = require('jsonwebtoken');
+const { json } = require('express');
 
 module.exports = {
     // login the user and create a session cookie
@@ -92,5 +93,18 @@ module.exports = {
 
         res.redirect('/');
 
+    },
+
+
+    protected: (req, res) => {
+        const token = req.headers.authorization.split(" ")[1];
+
+        try {
+            const user = jwt.verify(token, secret);
+            console.log(user.data.userName);
+            res.json({ message: `Welcome to the club, ${user.data.userName}`});
+        } catch {
+            res.status(403).json({message: "Invalid token"});
+        }
     },
 }
