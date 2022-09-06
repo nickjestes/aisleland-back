@@ -4,6 +4,22 @@ const jwt = require('jsonwebtoken');
 const { json } = require('express');
 
 module.exports = {
+    // list all registered users
+    listUsers: (req, res) => {
+        User.find({})
+        .then(data => {
+            const filter = data.map(user => { return {
+                id: user._id,
+                userName: user.userName, 
+                email: user.email
+            }})
+
+            res.json(filter);
+        }).catch(err => {
+            res.status(500).json({ msg: "ERROR", err })
+        })
+    },
+
     // login the user and create a session cookie
     loginUser: async (req, res) => {
         try {
@@ -90,24 +106,23 @@ module.exports = {
         // Cookies that have been signed
         console.log('Signed Cookies: ', req.signedCookies)
         /* DEBUG */
-
-        res.redirect('/');
+        // res.redirect('/');
 
     },
 
-
+    // respond with a message of whether the user has a valid token
     protected: (req, res) => {
         const token = req.headers.authorization.split(" ")[1];
 
         try {
             const user = jwt.verify(token, secret);
-            res.json({ message: `Welcome to the club, ${user.data.userName}`});
+            res.json({ message: `Welcome to the club, ${user.data.userName}` });
         } catch {
-            res.status(403).json({message: "Invalid token"});
+            res.status(403).json({ message: "Invalid token" });
         }
     },
 
-
+    // respond with an user Object if user has a valid token
     checkToken: (req, res) => {
         const token = req.headers.authorization.split(" ")[1];
 
@@ -115,7 +130,7 @@ module.exports = {
             const user = jwt.verify(token, secret);
             res.json(user);
         } catch {
-            res.status(403).json({message: "Invalid token"});
+            res.status(403).json({ message: "Invalid token" });
         }
     },
 }
