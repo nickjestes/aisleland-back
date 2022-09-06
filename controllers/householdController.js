@@ -7,7 +7,7 @@ module.exports = {
             .select('-__v')
             .then((store) =>
                 // res.json(store.allItems.foodCategories)
-                Household.find({ '_id': store.allItems.householdCategories })
+                Household.find({ _id: store.allItems.householdCategories })
                     .then((households) => {
                         res.json(households)
                     })
@@ -27,8 +27,8 @@ module.exports = {
     // update (POST) a selected Food in db
     updateHousehold(req, res) {
         Household.findOneAndUpdate(
-            {_id: req.params.householdId},
-            {aisleLocation: req.body.aisleLocation},
+            { _id: req.params.householdId },
+            { aisleLocation: req.body.aisleLocation },
             { runValidators: true, new: true }
         )
             .then((household) => res.json(household))
