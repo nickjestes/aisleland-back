@@ -27,7 +27,8 @@ module.exports = {
     // update (POST) a selected Food in db
     updateFood(req, res) {
         console.log(req.params,req.body)
-        Food.findOneAndUpdate(req.params.foodId,
+        Food.findOneAndUpdate(
+            {_id: req.params.foodId},
             {aisleLocation: req.body.aisleLocation},
             { runValidators: true, new: true }
         )
