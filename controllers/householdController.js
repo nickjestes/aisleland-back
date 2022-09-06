@@ -26,8 +26,9 @@ module.exports = {
 
     // update (POST) a selected Food in db
     updateHousehold(req, res) {
-        Household.findOneAndUpdate(req.params.householdId,
-            req.body,
+        Household.findOneAndUpdate(
+            {_id: req.params.householdId},
+            {aisleLocation: req.body.aisleLocation},
             { runValidators: true, new: true }
         )
             .then((household) => res.json(household))
