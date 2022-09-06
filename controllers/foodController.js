@@ -27,7 +27,7 @@ module.exports = {
     // update (POST) a selected Food in db
     updateFood(req, res) {
         Food.findOneAndUpdate({ _id: req.params.foodId },
-            req.body,
+            { aisleLocation: req.body.aisleLocation },
             { runValidators: true, new: true }
         )
             .then((food) => res.json(food))
