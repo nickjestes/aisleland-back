@@ -29,6 +29,14 @@ const userSchema = new Schema({
             "Invalid Email, please try another",
         ],
     },
+    firstName: {
+        type: String,
+        required: true,
+    },  
+    lastName: {
+        type: String,
+        required: true,
+    },
     password: { type: String, required: true } // this is hashed
 },
     {
