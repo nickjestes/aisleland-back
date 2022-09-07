@@ -19,6 +19,7 @@ const majorCategorySchema = new Schema(
     },
     {
         id: false,
+        _id: false
     }
 );
 

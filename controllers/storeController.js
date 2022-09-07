@@ -27,6 +27,13 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+    // GET all stores
+    getAllStores(req, res) {
+        Store.find({})
+            .then((stores) => res.json(stores))
+            .catch((err) => res.status(500).json(err));
+    },
+
     // PUT to update an existing store 
     updateStore(req, res) {
         Store.findOneAndUpdate(req.params.storeId, req.body,
@@ -52,7 +59,7 @@ module.exports = {
             address: req.body.address,
             zipCode: req.body.zipCode,
             allItems: {
-                foodCategories3: foods.map(x => x._id),
+                foodCategories: foods.map(x => x._id),
                 householdCategories: households.map(x => x._id)
             },
         })
