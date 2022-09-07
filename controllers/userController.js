@@ -74,7 +74,9 @@ module.exports = {
         User.create({
             userName: req.body.userName,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
         }).then(data => {
             // update cookie so user gets logged in
             const token = signToken(data)
@@ -84,7 +86,6 @@ module.exports = {
         }).catch(err => {
             console.error("the err", err);
             res.status(500).json({ msg: "ERROR on user registration:", err })
-            // console.info("my session now:", req.session.user);
         });
     },
 
