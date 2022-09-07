@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const { Store, Household, Food } = require('../models');
+const { ALLITEMS } = require('../utils/data');
 
 module.exports = {
 
@@ -41,13 +42,22 @@ module.exports = {
     },
 
     // POST to create a store
-    createStore(req, res) {
-        // expecting body to have json with name/address/zipCode k:v pairs
-        Store.create(req.body)
-            .then((store) => res.json(store))
-            .catch((err) => {
-                console.error(err);
-                return res.status(500).json(err);
-            });
+    createStore: async (req, res) => {
+        const { foodCategories3, householdCategories3 } = ALLITEMS[2];
+        const foods = await Food.create(foodCategories3);
+        const households = await Household.create(householdCategories3);
+
+        await Store.collection.insertOne({
+            name: req.body.name,
+            address: req.body.address,
+            zipCode: req.body.zipCode,
+            allItems: {
+                foodCategories3: foods.map(x => x._id),
+                householdCategories: households.map(x => x._id)
+            },
+        })
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err));
+
     },
 }

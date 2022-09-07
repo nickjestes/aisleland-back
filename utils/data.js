@@ -370,6 +370,193 @@ let householdItems_store2 = [
     }    
 ]
 
+let foods_store3 = [
+    {
+        typeName: 'Bread'
+        
+    },
+    {
+        typeName: 'Cereal'
+        
+    },
+    {
+        typeName: 'Chips'
+        
+    },
+    {
+        typeName: 'Granola Bars'
+        
+    },
+    {
+        typeName: 'Pasta'
+        
+    },
+    {
+        typeName: 'Jams'
+        
+    },
+    {
+        typeName: 'Coffee'
+        
+    },
+    {
+        typeName: 'Tea'
+        
+    },
+    {
+        typeName: 'Baking'
+        
+    },
+    {
+        typeName: 'Bulk Foods'
+        
+    },
+    {
+        typeName: 'Rice'
+        
+    },
+    {
+        typeName: 'Condiments'
+        
+    },
+    {
+        typeName: 'Salad Dressing'
+        
+    },
+    {
+        typeName: 'Eggs'
+        
+    },
+    {
+        typeName: 'Juice'
+        
+    },
+    {
+        typeName: 'Butter'
+        
+    },
+    {
+        typeName: 'Canned Tomatoes'
+        
+    },
+    {
+        typeName: 'Canned Beans'
+        
+    },
+    {
+        typeName: 'Canned Peas'
+        
+    },
+    {
+        typeName: 'Canned Peaches'
+        
+    },
+    {
+        typeName: 'Canned Tuna'
+        
+    },
+    {
+        typeName: 'Canned Chili'
+        
+    },
+    {
+        typeName: 'Canned Soup'
+        
+    },
+    {
+        typeName: 'Frozen Pizza'
+        
+    },
+    {
+        typeName: 'Frozen Single Meals'
+        
+    },
+    {
+        typeName: 'Frozen Burritos'
+        
+    },
+    {
+        typeName: 'Frozen Family Meals'
+        
+    },
+    {
+        typeName: 'Frozen Vegetables'
+        
+    },
+    {
+        typeName: 'Frozen Meats'
+        
+    }
+]
+
+
+let householdItems_store3 = [
+    {
+        typeName: 'Baby Formula',
+        
+    },
+    {
+        typeName: 'Baby Diapers',
+        
+    },
+    {
+        typeName: 'Hair Products',
+        
+    },
+    {
+        typeName: 'Cold and Flu',
+        
+    },
+    {
+        typeName: 'Pain Medication',
+        
+    },
+    {
+        typeName: 'Contraception',
+        
+    },
+    {
+        typeName: 'Brooms and Mops',
+        
+    },
+    {
+        typeName: 'Toilet Paper',
+        
+    },
+    {
+        typeName: 'Garbage Bags',
+        
+    },
+    {
+        typeName: 'Cleaners',
+        
+    },
+    {
+        typeName: 'Fabric Softener',
+        
+    },
+    {
+        typeName: 'Detergent',
+        
+    },
+    {
+        typeName: 'Sponges',
+        
+    },
+    {
+        typeName: 'Rubber Gloves',
+        
+    },
+    {
+        typeName: 'Napkins',
+        
+    },
+    {
+        typeName: 'Paper Towels',
+        
+    }  
+]
+
 
 const ALLITEMS = [
     {
@@ -379,13 +566,19 @@ const ALLITEMS = [
     {
         foodCategories2: foods_store2,
         householdCategories2: householdItems_store2,
+    },
+    {
+        foodCategories3: foods_store3,
+        householdCategories3: householdItems_store3,
     }
 ]
 
 const userData = {
     userName: 'alphaTesterPrime',
     email: 'alphatesters@mail.com',
-    password: 'password1'
+    password: 'password1',
+    firstName: 'John',
+    lastName: 'Doe'
 };
 
 const handleError = (err) => console.error(err);

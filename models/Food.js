@@ -7,8 +7,13 @@ const foodSchema = new Schema({
     },
     aisleLocation: {
         type: String,
-        required: true,
+        required: false,
+        default: '',
     },
+    unixTimestamp: {
+        type: Number,
+        default: Date.now(),
+    }
 },
     {
         toJSON: {

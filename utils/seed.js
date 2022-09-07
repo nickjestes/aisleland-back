@@ -1,4 +1,4 @@
-const connection = require('../config/connection');
+const {connection} = require('../config/connection');
 const { Store, Household, Food, User } = require('../models');
 const { ALLITEMS, userData, handleError } = require('./data');
 

@@ -7,7 +7,8 @@ const householdItemSchema = new Schema({
     },
     aisleLocation: {
         type: String,
-        required: true,
+        required: false,
+        default: '',
     },
     unixTimestamp: {
         type: Number,
